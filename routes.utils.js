@@ -1,4 +1,4 @@
-import expressListEndpoints from "express-list-endpoints";
+const expressListEndpoints = require("express-list-endpoints");
 
 async function addNewRoute(appRouteDetails, RouteModelPromise) {
   try {
@@ -107,7 +107,7 @@ async function manageRoutes(
   }
 }
 
-async function syncRouteDetails(dependencyValues = {}) {
+module.exports = async function syncRouteDetails(dependencyValues = {}) {
   try {
     const { app, GlobalConfig, AccessGroupModelPromise, RouteModelPromise } =
       dependencyValues;
@@ -126,6 +126,4 @@ async function syncRouteDetails(dependencyValues = {}) {
     console.error(error);
     throw new Error(error?.message || error);
   }
-}
-
-export default syncRouteDetails;
+};
