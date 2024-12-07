@@ -107,7 +107,7 @@ async function manageRoutes(
   }
 }
 
-module.exports = async function syncRouteDetails(dependencyValues = {}) {
+async function syncDetails(dependencyValues = {}) {
   try {
     const { app, GlobalConfig, AccessGroupModelPromise, RouteModelPromise } =
       dependencyValues;
@@ -122,6 +122,15 @@ module.exports = async function syncRouteDetails(dependencyValues = {}) {
     );
 
     console.log("Routes synchronized successfully.");
+  } catch (error) {
+    console.error(error);
+    throw new Error(error?.message || error);
+  }
+}
+
+module.exports = function syncRouteDetails(dependencyValues = {}) {
+  try {
+    syncDetails(dependencyValues);
   } catch (error) {
     console.error(error);
     throw new Error(error?.message || error);
