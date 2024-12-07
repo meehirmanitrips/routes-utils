@@ -2,11 +2,15 @@
   "name": "routes-utils",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "routes.utils.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "type": "module",
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express-list-endpoints": "^7.1.1"
+  }
 }
