@@ -2,15 +2,22 @@
   "name": "routes-utils",
   "version": "1.0.0",
   "description": "",
-  "main": "routes.utils.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel src --out-dir dist --copy-files",
+    "prepublishOnly": "npm run build"
   },
-  "type": "commonjs",
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "babel": "^6.23.0",
     "express-list-endpoints": "^7.1.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.26.4",
+    "@babel/core": "^7.26.0",
+    "@babel/preset-env": "^7.26.0"
   }
 }

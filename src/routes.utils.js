@@ -1,6 +1,6 @@
-const expressListEndpoints = require("express-list-endpoints");
+import expressListEndpoints from "express-list-endpoints";
 
-async function addNewRoute(appRouteDetails, RouteModelPromise) {
+export async function addNewRoute(appRouteDetails, RouteModelPromise) {
   try {
     const { RoutesModel } = await RouteModelPromise;
     const appRoute = new RoutesModel({
@@ -14,7 +14,7 @@ async function addNewRoute(appRouteDetails, RouteModelPromise) {
   }
 }
 
-async function getRoute(routePath, GlobalConfig, RouteModelPromise) {
+export async function getRoute(routePath, GlobalConfig, RouteModelPromise) {
   try {
     const { APP_NAME, APP_NAMESPACE } = GlobalConfig;
     const { RoutesModel } = await RouteModelPromise;
@@ -31,11 +31,11 @@ async function getRoute(routePath, GlobalConfig, RouteModelPromise) {
   }
 }
 
-async function manageRoutes(
+export async function manageRoutes(
   routeStack,
   GlobalConfig,
   AccessGroupModelPromise,
-  RouteModelPromise
+  RouteModelPromise,
 ) {
   try {
     const { APP_NAME, APP_NAMESPACE, APP_PROTOCOL, APP_HOST, APP_PORT } =
@@ -72,7 +72,7 @@ async function manageRoutes(
         const route = await getRoute(
           routeDetail.path,
           GlobalConfig,
-          RouteModelPromise
+          RouteModelPromise,
         );
 
         if (route) {
@@ -99,7 +99,7 @@ async function manageRoutes(
         } else {
           await addNewRoute(routeDetails, RouteModelPromise);
         }
-      })
+      }),
     );
   } catch (error) {
     console.error(error);
@@ -107,7 +107,7 @@ async function manageRoutes(
   }
 }
 
-async function syncDetails(dependencyValues = {}) {
+export async function syncRouteDetails(dependencyValues = {}) {
   try {
     const { app, GlobalConfig, AccessGroupModelPromise, RouteModelPromise } =
       dependencyValues;
@@ -118,7 +118,7 @@ async function syncDetails(dependencyValues = {}) {
       routeStack,
       GlobalConfig,
       AccessGroupModelPromise,
-      RouteModelPromise
+      RouteModelPromise,
     );
 
     console.log("Routes synchronized successfully.");
@@ -127,12 +127,3 @@ async function syncDetails(dependencyValues = {}) {
     throw new Error(error?.message || error);
   }
 }
-
-module.exports = function syncRouteDetails(dependencyValues = {}) {
-  try {
-    syncDetails(dependencyValues);
-  } catch (error) {
-    console.error(error);
-    throw new Error(error?.message || error);
-  }
-};
