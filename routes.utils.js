@@ -49,7 +49,7 @@ async function manageRoutes(
     });
 
     if (!adminAccessGroup) {
-      throw httpErrors.UnprocessableEntity(`Admin access group error.`);
+      throw new Error(`Admin access group error.`);
     }
 
     await Promise.all(
