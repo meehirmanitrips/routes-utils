@@ -107,7 +107,7 @@ async function manageRoutes(
   }
 }
 
-async function syncDetails(dependencyValues = {}) {
+async function syncRouteDetails(dependencyValues = {}) {
   try {
     const { app, GlobalConfig, AccessGroupModelPromise, RouteModelPromise } =
       dependencyValues;
@@ -128,4 +128,4 @@ async function syncDetails(dependencyValues = {}) {
   }
 }
 
-export default syncDetails;
+export default syncRouteDetails;
